@@ -3,10 +3,23 @@ name = "web-bot-auth"
 version = "0.1.0"
 description = "A library to check for AI Bot Authentication using the latest HTTP header Signature."
 requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [
+    { name="Atish Joottun", email="atish.joottun@cyberstorm.mu" },
+    { name="Thibault Meunier", email="mail@thibaultmeunier.com" },
+]
 dependencies = [
     "wheel"
 ]
 
+[tool.uv]
+package = true
+
 [build-system]
 requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/yourname/your-library"
+Repository = "https://github.com/yourname/your-library"
+Issues = "https://github.com/yourname/your-library/issues"

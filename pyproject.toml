@@ -1,22 +1,3 @@
-[project]
-name = "Bot-Authentication"
-version = "0.1.0"
-description = "A library to check for AI Bot Authentication using the latest HTTP header Signature."
-readme = "README.md"
-license = { file = "LICENSE" }
-authors = [
-    { name="Atish Joottun", email="atish.joottun@cyberstorm.mu" },
-    { name="Thibault Meunier", email="mail@thibaultmeunier.com" },
-]
-dependencies = [
-    "web-bot-auth",
-    "scrapy>=2.13.3",
-]
-requires-python = ">=3.13"
-
-[tool.uv.sources]
-web-bot-auth = { workspace = true }
-
 [tool.uv.workspace]
 members = [
     "examples/*",
@@ -26,9 +7,3 @@ members = [
 [build-system]
 requires = ["uv_build>=0.8.0,<0.9"]
 build-backend = "uv_build"
-
-
-[project.urls]
-Homepage = "https://github.com/yourname/your-library"
-Repository = "https://github.com/yourname/your-library"
-Issues = "https://github.com/yourname/your-library/issues"

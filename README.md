@@ -16,8 +16,3 @@ uv build --package web-bot-auth
 ```
 
 Examples are in the `examples` folder.
-You can run them with
-
-```shell
-uv run examples/scrapy
-```

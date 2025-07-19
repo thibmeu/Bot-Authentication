@@ -1,2 +1,4 @@
 packages/web-bot-auth/web_bot_auth
 dist
+__pycache__
+examples/scrapy-spider/**/scrapy_spider.egg-info
