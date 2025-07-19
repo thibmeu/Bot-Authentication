@@ -1,6 +1,10 @@
 """
-Web Bot Auth downloader middleware
+Scrapy Spider with Web Bot Authentication
+
+An example project showing how to use web-bot-auth with Scrapy.
 """
+
+__version__ = "0.1.0"
 
 from __future__ import annotations
 
@@ -44,3 +48,6 @@ class WebBotAuthMiddleware:
         ):
             request.headers[b"Authorization"] = auth
         return None
+
+# Export the main class and version
+__all__ = ["WebBotAuthMiddleware", "__version__"]
