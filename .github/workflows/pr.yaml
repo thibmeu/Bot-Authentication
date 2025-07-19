@@ -33,13 +33,7 @@ jobs:
       - name: Build package
         run: uv build --no-sources
 
-      # 6. Update APT and install Chromium
-      - name: Update APT and install Chromium
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-
-      # 7. Run all examples under examples/foo
+      # 6. Run all examples under examples/foo
       - name: Run examples
         run: |
           for example in examples/*; do
