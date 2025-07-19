@@ -4,6 +4,7 @@ requires-python = ">=3.13"
 
 [manifest]
 members = [
+    "crawl4ai-hook",
     "scrapy-spider",
     "web-bot-auth",
 ]
@@ -87,6 +88,11 @@ sdist = { url = "https://files.pythonhosted.org/packages/4d/6f/cb2a94494ff74aa95
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b8/40/c199d095151addf69efdb4b9ca3a4f20f70e20508d6222bffb9b76f58573/constantly-23.10.4-py3-none-any.whl", hash = "sha256:3fd9b4d1c3dc1ec9757f3c52aef7e53ad9323dbe39f51dfd4c43853b68dfa3f9", size = 13547, upload-time = "2023-10-28T23:18:23.038Z" },
 ]
+
+[[package]]
+name = "crawl4ai-hook"
+version = "0.1.0"
+source = { virtual = "examples/crawl4ai-hook" }
 
 [[package]]
 name = "cryptography"
@@ -408,7 +414,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "scrapy", specifier = ">=2.13.3" },
-    { name = "web-bot-auth", editable = "packages/web-bot-auth" },
+    { name = "web-bot-auth", editable = "." },
     { name = "wheel" },
 ]
 
@@ -499,7 +505,7 @@ wheels = [
 [[package]]
 name = "web-bot-auth"
 version = "0.1.0"
-source = { editable = "packages/web-bot-auth" }
+source = { editable = "." }
 dependencies = [
     { name = "cryptography" },
     { name = "requests" },

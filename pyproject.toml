@@ -1,9 +1,24 @@
-[tool.uv.workspace]
-members = [
-    "examples/*",
-    "packages/*",
+[project]
+name = "web-bot-auth"
+version = "0.1.0"
+description = "A library to check for AI Bot Authentication using the latest HTTP header Signature."
+requires-python = ">=3.13"
+license = { file = "LICENSE" }
+authors = [
+    { name="Atish Joottun", email="atish.joottun@cyberstorm.mu" },
+    { name="Thibault Meunier", email="mail@thibaultmeunier.com" },
+    { name="Antonin Vlcek", email="tony@vlcek.dev" },
+]
+dependencies = [
+    "cryptography>=45.0.0",
+    "requests>=2.25.0"
 ]
 
 [build-system]
 requires = ["uv_build>=0.8.0,<0.9"]
 build-backend = "uv_build"
+
+[tool.uv.workspace]
+members = [
+    "examples/*",
+]

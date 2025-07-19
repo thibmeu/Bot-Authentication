@@ -12,7 +12,15 @@ Implementation of web bot auth in python
 To build web-bot-auth package
 
 ```shell
-uv build --package web-bot-auth
+python3 -m venv .venv
+source .venv/bin/activate
+
+uv build
+uv pip install -e .
 ```
 
 Examples are in the `examples` folder.
+
+```shell
+uv run examples/crawl4ai-hook/main.py
+```
