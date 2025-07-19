@@ -115,8 +115,8 @@ class BotAuth:
         expires = now + 3600
         param = (
             '("@authority" "signature-agent");'
-            f'created={created};'
-            f'expires={expires};'
+            f"created={created};"
+            f"expires={expires};"
             f'keyid="{selected_key["kid"]}";'
             'tag="web-bot-auth"'
         )

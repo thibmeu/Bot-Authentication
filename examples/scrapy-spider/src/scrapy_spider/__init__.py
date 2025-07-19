@@ -32,13 +32,15 @@ class WebBotAuthMiddleware:
         private_key = (
             crawler.settings["WEB_BOT_AUTH_SIGNING_KEY"]
             # to be replaced with None
-            or json.dumps({
-                "kty": "OKP",
-                "crv": "Ed25519",
-                "kid": "poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U",
-                "d": "n4Ni-HpISpVObnQMW0wOhCKROaIKqKtW_2ZYb2p9KcU",
-                "x": "JrQLj5P_89iXES9-vFgrIy29clF9CC_oPPsw3c5D0bs"
-            })
+            or json.dumps(
+                {
+                    "kty": "OKP",
+                    "crv": "Ed25519",
+                    "kid": "poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U",
+                    "d": "n4Ni-HpISpVObnQMW0wOhCKROaIKqKtW_2ZYb2p9KcU",
+                    "x": "JrQLj5P_89iXES9-vFgrIy29clF9CC_oPPsw3c5D0bs",
+                }
+            )
         )
         cls.__wba = BotAuth([json.loads(private_key)])
         crawler.signals.connect(o.spider_opened, signal=signals.spider_opened)
