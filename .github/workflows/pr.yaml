@@ -34,7 +34,7 @@ jobs:
         run: uv build --no-sources
 
       # 6. Lint
-      - name: Build package
+      - name: Lint
         run: |
           uv run ruff check .
           uv run black --check .
