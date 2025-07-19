@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: web-bot-auth
+Version: 0.1.0
+Summary: A library to check for AI Bot Authentication using the latest HTTP header Signature.
+Requires-Python: >=3.13
+Requires-Dist: wheel
