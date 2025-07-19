@@ -7,4 +7,5 @@ Project-URL: Homepage, https://github.com/yourname/your-library
 Project-URL: Repository, https://github.com/yourname/your-library
 Project-URL: Issues, https://github.com/yourname/your-library/issues
 Requires-Python: >=3.13
-Requires-Dist: wheel
+Requires-Dist: cryptography>=45.0.0
+Requires-Dist: requests>=2.25.0

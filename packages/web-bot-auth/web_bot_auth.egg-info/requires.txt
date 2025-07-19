@@ -1,1 +1,2 @@
-wheel
+cryptography>=45.0.0
+requests>=2.25.0

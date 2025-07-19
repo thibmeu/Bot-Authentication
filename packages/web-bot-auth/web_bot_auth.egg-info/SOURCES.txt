@@ -1,4 +1,5 @@
 pyproject.toml
+web_bot_auth/__init__.py
 web_bot_auth.egg-info/PKG-INFO
 web_bot_auth.egg-info/SOURCES.txt
 web_bot_auth.egg-info/dependency_links.txt

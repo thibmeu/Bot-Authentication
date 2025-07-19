@@ -9,7 +9,8 @@ authors = [
     { name="Thibault Meunier", email="mail@thibaultmeunier.com" },
 ]
 dependencies = [
-    "wheel"
+    "cryptography>=45.0.0",
+    "requests>=2.25.0"
 ]
 
 [tool.uv]

@@ -501,11 +501,15 @@ name = "web-bot-auth"
 version = "0.1.0"
 source = { editable = "packages/web-bot-auth" }
 dependencies = [
-    { name = "wheel" },
+    { name = "cryptography" },
+    { name = "requests" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "wheel" }]
+requires-dist = [
+    { name = "cryptography", specifier = ">=45.0.0" },
+    { name = "requests", specifier = ">=2.25.0" },
+]
 
 [[package]]
 name = "wheel"
