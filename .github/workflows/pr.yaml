@@ -43,8 +43,8 @@ jobs:
       - name: Run examples
         run: |
           echo "Running crawl4ai" 
-          cd examples/crawl4ai
-          uv playwright install --with-deps chromium
+          cd examples/crawl4ai-hook
+          uv run playwright install --with-deps chromium
           uv run main.py
           
           echo "Running scrapy-spider"

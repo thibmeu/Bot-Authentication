@@ -481,10 +481,14 @@ version = "0.1.0"
 source = { virtual = "examples/crawl4ai-hook" }
 dependencies = [
     { name = "crawl4ai" },
+    { name = "playwright" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "crawl4ai", specifier = ">=0.7.1" }]
+requires-dist = [
+    { name = "crawl4ai", specifier = ">=0.7.1" },
+    { name = "playwright", specifier = ">=1.53.0" },
+]
 
 [[package]]
 name = "cryptography"
