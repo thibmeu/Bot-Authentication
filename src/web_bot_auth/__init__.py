@@ -6,25 +6,33 @@ A library to check for AI Bot Authentication using the latest HTTP header Signat
 
 __version__ = "0.1.0"
 
-import base64, requests, time
+import base64
+import requests
+import time
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
+
 class BotAuth:
-    '''
+    """
     BotAuth(url)
-    
+
     @PARAMS
     - LocalKeys : Path where the local keys are stored.  Format: list[dict[str, str]]
-    
+
     @METHODS
     - get_local_keys() -> -> list[dict[str, str]]
     - get_remote_keys() -> list[dict[str, str]]
     - get_header()-> dict[str, str]
-        
+
     @info:
     © 2025 Atish Joottun
-    '''
-    def __init__(self, localKeys, signAgent="http-message-signatures-example.research.cloudflare.com"):
+    """
+
+    def __init__(
+        self,
+        localKeys,
+        signAgent="http-message-signatures-example.research.cloudflare.com",
+    ):
         self.localKeys = localKeys
         self.signAgent = signAgent
 
@@ -57,13 +65,16 @@ class BotAuth:
         except Exception as e:
             print(e)
             return None
-        
+
     def get_remote_keys(self, url) -> list[dict[str, str]]:
         """
-        This function fetches the remote keys from the given URL. uisng the /.well-known/http-message-signatures-directory endpoint.
+        This function fetches the remote keys from the given URL.
+        Using the /.well-known/http-message-signatures-directory endpoint.
         """
         domain = requests.utils.urlparse(url).netloc
-        well_known_url = f"https://{domain}/.well-known/http-message-signatures-directory"
+        well_known_url = (
+            f"https://{domain}/.well-known/http-message-signatures-directory"
+        )
         res = requests.get(well_known_url)
         try:
             res_json = res.json()
@@ -71,7 +82,6 @@ class BotAuth:
         except Exception as e:
             print(e)
             return None
-        
 
     def _base64url_decode(self, val):
         return base64.urlsafe_b64decode(val + "=" * (-len(val) % 4))
@@ -89,10 +99,10 @@ class BotAuth:
 
     def get_bot_signature_header(self, url) -> dict[str, str]:
         """
-        This creates and build the signature of the bot based on the key provided. Append the result to the request Header before making the result.
+        This creates and build the signature of the bot based on the key provided.
+        Append the result to the request Header before making the result.
         """
         local_keys = self.localKeys
-
 
         ## Get similar key in local repo
         selected_key = local_keys[0]
@@ -103,10 +113,22 @@ class BotAuth:
         now = int(time.time())
         created = now
         expires = now + 3600
-        param = f'("@authority" "signature-agent");created={created};expires={expires};keyid="{selected_key["kid"]}";tag="web-bot-auth"'
-        base = f'"@authority": {authority}\n"signature-agent": {self.signAgent}\n"@signature-params": {param}'
+        param = (
+            '("@authority" "signature-agent");'
+            f'created={created};'
+            f'expires={expires};'
+            f'keyid="{selected_key["kid"]}";'
+            'tag="web-bot-auth"'
+        )
+        base = (
+            f'"@authority": {authority}\n'
+            f'"signature-agent": {self.signAgent}\n'
+            f'"@signature-params": {param}'
+        )
 
-        signature_b64 = self._base64_encode_bytes(private_key.sign(base.encode("utf-8")))
+        signature_b64 = self._base64_encode_bytes(
+            private_key.sign(base.encode("utf-8"))
+        )
         header = {
             "Signature-Agent": self.signAgent,
             "Signature-Input": f"sig={param}",
@@ -114,6 +136,7 @@ class BotAuth:
         }
 
         return header
+
 
 # Export the main class and version
 __all__ = ["BotAuth", "__version__"]

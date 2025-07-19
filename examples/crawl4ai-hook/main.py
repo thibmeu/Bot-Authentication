@@ -1,19 +1,21 @@
 import asyncio
-import time
-from crawl4ai import AsyncWebCrawler, BrowserConfig, CrawlerRunConfig, CacheMode
+from crawl4ai import AsyncWebCrawler, BrowserConfig
 from playwright.async_api import Page, BrowserContext
 from web_bot_auth import BotAuth
 
+
 async def main():
-    wb = BotAuth([
-             {
-                 "kty": "OKP",
-                 "crv": "Ed25519",
-                 "kid": "poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U",
-                 "d": "n4Ni-HpISpVObnQMW0wOhCKROaIKqKtW_2ZYb2p9KcU",
-                 "x": "JrQLj5P_89iXES9-vFgrIy29clF9CC_oPPsw3c5D0bs",
-             }
-         ])
+    wb = BotAuth(
+        [
+            {
+                "kty": "OKP",
+                "crv": "Ed25519",
+                "kid": "poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U",
+                "d": "n4Ni-HpISpVObnQMW0wOhCKROaIKqKtW_2ZYb2p9KcU",
+                "x": "JrQLj5P_89iXES9-vFgrIy29clF9CC_oPPsw3c5D0bs",
+            }
+        ]
+    )
 
     # 1) Configure the browser
     browser_config = BrowserConfig(headless=True, verbose=True)
@@ -47,6 +49,7 @@ async def main():
         print("Error:", result.error_message)
 
     await crawler.close()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
