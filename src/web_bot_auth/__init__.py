@@ -87,31 +87,18 @@ class BotAuth:
     #     public_key = private_key.public_key()
     #     return public_key.public_bytes(Encoding.Raw, PublicFormat.Raw)
 
-    def get_bot_signature_header(self) -> dict[str, str]:
+    def get_bot_signature_header(self, url) -> dict[str, str]:
         """
         This creates and build the signature of the bot based on the key provided. Append the result to the request Header before making the result.
         """
-        remote_keys = self.get_remote_keys()
         local_keys = self.localKeys
 
-        if remote_keys is None:
-            return None
 
         ## Get similar key in local repo
-        selected_key = None
-        for local in local_keys:
-            for remote in remote_keys.get("keys", []):
-                if remote.get("kid") == local.get("kid") and remote.get("x") == local.get("x"):
-                    selected_key = local
-                    break
-            if selected_key:
-                break
-
-        if not selected_key:
-            return None
+        selected_key = local_keys[0]
 
         private_key = self._jwt_to_private_key(selected_key)
-        url_obj = requests.utils.urlparse(self.url)
+        url_obj = requests.utils.urlparse(url)
         authority = url_obj.netloc
         now = int(time.time())
         created = now
