@@ -1,4 +1,5 @@
 import asyncio
+import sys
 from crawl4ai import AsyncWebCrawler, BrowserConfig
 from playwright.async_api import Page, BrowserContext
 from web_bot_auth import BotAuth
@@ -39,7 +40,9 @@ async def main():
     await crawler.start()
 
     # 5) Run the crawler on an example page
-    url = "https://http-message-signatures-example.research.cloudflare.com"
+    # use the command line argument to specify the URL
+    args = sys.argv[1:]
+    url = args[0]
     result = await crawler.arun(url)
 
     if result.success:
