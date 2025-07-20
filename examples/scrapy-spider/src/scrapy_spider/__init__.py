@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 import json
 
 from scrapy import Request, Spider, signals
-from web_bot_auth import BotAuth
+from bot_auth import BotAuth
 
 if TYPE_CHECKING:
     # typing.Self requires Python 3.11

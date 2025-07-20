@@ -1,7 +1,7 @@
 import asyncio
 from crawl4ai import AsyncWebCrawler, BrowserConfig
 from playwright.async_api import Page, BrowserContext
-from web_bot_auth import BotAuth
+from bot_auth import BotAuth
 
 
 async def main():
