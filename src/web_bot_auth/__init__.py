@@ -13,7 +13,6 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from datetime import datetime, timedelta
 from http_message_signatures import (
     HTTPMessageSigner,
-    HTTPMessageVerifier,
     HTTPSignatureKeyResolver,
     algorithms,
 )
@@ -139,8 +138,6 @@ class BotAuth:
             signature_algorithm=algorithms.ED25519, key_resolver=resolver
         )
 
-        url_obj = requests.utils.urlparse(url)
-        authority = url_obj.netloc
         created = datetime.fromtimestamp(time.time())
         expires = created + timedelta(minutes=5)
 
