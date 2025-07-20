@@ -1,6 +1,7 @@
 # Web bot auth Python
 
 ![GitHub License](https://img.shields.io/github/license/cloudflareresearch/web-bot-auth)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Implementation of web bot auth in python
 
@@ -14,24 +15,24 @@ Implementation of web bot auth in python
 To build web-bot-auth package
 
 ```shell
-python3 -m venv .venv
-source .venv/bin/activate
+uv sync
 
 uv build
-uv pip install -e .
 ```
 
 Examples are in the `examples` folder.
+Each example is a project, see the README in each example folder to run it.
 
 ```shell
-uv run examples/crawl4ai-hook/main.py
+cd examples/crawl4ai-hook
+uv run main.py
 ```
 
 ### Lint
 
 This codebase uses [ruff](https://docs.astral.sh/ruff/) and [Black](https://black.readthedocs.io/en/stable/index.html) for linting.
 
-For run a check, use
+To run a check, use
 
 ```shell
 uv run ruff check .
@@ -41,7 +42,6 @@ uv run black --check .
 To format the codebase
 
 ```shell
-
 uv run ruff format .
 uv run black .
 ```
