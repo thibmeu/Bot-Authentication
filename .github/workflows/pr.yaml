@@ -46,7 +46,7 @@ jobs:
           cd examples/crawl4ai-hook
           uv run playwright install --with-deps chromium
           uv run main.py https://http-message-signatures-example.research.cloudflare.com/debug
-          
+
           echo "Running scrapy-spider"
           cd ../scrapy-spider
           uv pip install -e .

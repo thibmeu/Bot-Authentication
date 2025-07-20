@@ -45,7 +45,7 @@ jobs:
           echo "Running crawl4ai"
           cd examples/crawl4ai-hook
           uv run playwright install --with-deps chromium
-          uv run main.py
+          uv run main.py https://http-message-signatures-example.research.cloudflare.com/debug
 
           echo "Running scrapy-spider"
           cd ../scrapy-spider
@@ -59,7 +59,7 @@ jobs:
           name: python-package-distributions
           path: dist/
 
-  publish-to-pipy:
+  publish-to-pypi:
     name: Publish Python 🐍 distribution 📦 to PyPI
     needs:
       - build
@@ -81,7 +81,7 @@ jobs:
       - name: Publish package distributions to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
 
-  publish-to-testpipy:
+  publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
     needs:
     - build
