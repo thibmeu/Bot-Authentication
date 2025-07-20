@@ -11,7 +11,8 @@ authors = [
 ]
 dependencies = [
     "cryptography>=45.0.0",
-    "requests>=2.25.0"
+    "http-message-signatures>=0.7.0",
+    "requests>=2.25.0",
 ]
 
 [build-system]

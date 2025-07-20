@@ -759,6 +759,31 @@ wheels = [
 ]
 
 [[package]]
+name = "http-message-signatures"
+version = "0.7.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cryptography" },
+    { name = "http-sfv" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/86/49/b7f64d9fe953273568b8d981b4b1fbac2e77671856650ede5fdf215122f1/http_message_signatures-0.7.0.tar.gz", hash = "sha256:ad0184d4e62d0d6224a7042c91a16136c3764dec4e4f0172c0c16423bb5fb8f7", size = 21124, upload-time = "2025-06-29T19:45:01.219Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c4/66/198073fbebaf2316f6c3d60b1484655243cb4023d4ba1ea4b2aa8183671d/http_message_signatures-0.7.0-py3-none-any.whl", hash = "sha256:f3c987384e593c8405c55c642153aa0e8fd66d23cec9ccfce4011df79c2ab7e4", size = 14476, upload-time = "2025-06-29T19:44:59.633Z" },
+]
+
+[[package]]
+name = "http-sfv"
+version = "0.9.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/57/ae/7684925d335eb4182d95b2d179c81fc05dbc89dc93e42b239c13f800525c/http_sfv-0.9.9.tar.gz", hash = "sha256:e132dc9bef990832bc01824f5fa9d4efc7d0f4271e4b227db35c8ef38540c739", size = 15973, upload-time = "2024-01-25T05:16:26.969Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/f7/f5adcd777e7e641c7824f4e45875a14cc7e0c6cd30b0f9db0c3698fd8e16/http_sfv-0.9.9-py3-none-any.whl", hash = "sha256:5feed51c90e9a1dc797701662d044d936923cf0027255c75452b8240e33d6c82", size = 16846, upload-time = "2024-01-25T05:16:24.072Z" },
+]
+
+[[package]]
 name = "httpcore"
 version = "1.0.9"
 source = { registry = "https://pypi.org/simple" }
@@ -2757,6 +2782,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "cryptography" },
+    { name = "http-message-signatures" },
     { name = "requests" },
 ]
 
@@ -2769,6 +2795,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "cryptography", specifier = ">=45.0.0" },
+    { name = "http-message-signatures", specifier = ">=0.7.0" },
     { name = "requests", specifier = ">=2.25.0" },
 ]
 

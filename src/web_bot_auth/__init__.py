@@ -10,6 +10,33 @@ import base64
 import requests
 import time
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from datetime import datetime, timedelta
+from http_message_signatures import (
+    HTTPMessageSigner,
+    HTTPMessageVerifier,
+    HTTPSignatureKeyResolver,
+    algorithms,
+)
+
+
+class SingleKeyResolver(HTTPSignatureKeyResolver):
+    """
+    SingleKeyResolver(key)
+
+    A simple key resolver that always returns the same key for any key ID.
+    """
+
+    def __init__(
+        self,
+        key,
+    ):
+        self.key = key
+
+    def resolve_public_key(self, key_id: str):
+        return self.key
+
+    def resolve_private_key(self, key_id: str):
+        return self.key
 
 
 class BotAuth:
@@ -107,32 +134,36 @@ class BotAuth:
         ## Get similar key in local repo
         selected_key = local_keys[0]
 
-        private_key = self._jwt_to_private_key(selected_key)
-        url_obj = requests.utils.urlparse(url)
-        authority = url_obj.netloc
-        now = int(time.time())
-        created = now
-        expires = now + 3600
-        param = (
-            '("@authority" "signature-agent");'
-            f"created={created};"
-            f"expires={expires};"
-            f'keyid="{selected_key["kid"]}";'
-            'tag="web-bot-auth"'
-        )
-        base = (
-            f'"@authority": {authority}\n'
-            f'"signature-agent": {self.signAgent}\n'
-            f'"@signature-params": {param}'
+        resolver = SingleKeyResolver(self._jwt_to_private_key(selected_key))
+        signer = HTTPMessageSigner(
+            signature_algorithm=algorithms.ED25519, key_resolver=resolver
         )
 
-        signature_b64 = self._base64_encode_bytes(
-            private_key.sign(base.encode("utf-8"))
+        url_obj = requests.utils.urlparse(url)
+        authority = url_obj.netloc
+        created = datetime.fromtimestamp(time.time())
+        expires = created + timedelta(minutes=5)
+
+        request = requests.Request(
+            "GET",
+            url,
+            headers={
+                "Signature-Agent": self.signAgent,
+            },
         )
+        signer.sign(
+            request,
+            key_id="compute-jwk-thumbprint",
+            covered_component_ids=("@authority", "signature-agent"),
+            created=created,
+            expires=expires,
+            tag="web-bot-auth",
+        )
+
         header = {
-            "Signature-Agent": self.signAgent,
-            "Signature-Input": f"sig={param}",
-            "Signature": f"sig=:{signature_b64}",
+            "Signature-Agent": request.headers["Signature-Agent"],
+            "Signature-Input": request.headers["Signature-Input"],
+            "Signature": request.headers["Signature"],
         }
 
         return header
