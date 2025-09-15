@@ -4,7 +4,7 @@ Web Bot Auth Library
 A library to check for AI Bot Authentication using the latest HTTP header Signature.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.3.0"
 
 import base64
 import hashlib
