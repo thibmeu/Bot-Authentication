@@ -227,7 +227,7 @@ wheels = [
 
 [[package]]
 name = "bot-auth"
-version = "0.2.2"
+version = "0.3.1"
 source = { editable = "." }
 dependencies = [
     { name = "cryptography" },

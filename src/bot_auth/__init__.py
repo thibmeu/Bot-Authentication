@@ -4,7 +4,7 @@ Web Bot Auth Library
 A library to check for AI Bot Authentication using the latest HTTP header Signature.
 """
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 import base64
 import hashlib
@@ -114,6 +114,9 @@ class BotAuth:
     def _base64_encode_bytes(self, val):
         return base64.b64encode(val).decode("ascii")
 
+    def _base64url_nopad_encode_bytes(self, val):
+        return base64.urlsafe_b64encode(val).decode("ascii").strip("=")
+
     def _jwt_to_private_key(self, jwk):
         return Ed25519PrivateKey.from_private_bytes(self._base64url_decode(jwk["d"]))
 
@@ -126,12 +129,12 @@ class BotAuth:
         jwk_dict = {
             "crv": "Ed25519",
             "kty": "OKP",
-            "x": self._base64_encode_bytes(public_key.public_bytes_raw()),
+            "x": self._base64url_nopad_encode_bytes(public_key.public_bytes_raw()),
         }
 
         jwk_json = json.dumps(jwk_dict, separators=(",", ":"), sort_keys=True)
         sha256_hash = hashlib.sha256(jwk_json.encode("utf-8")).digest()
-        thumbprint = base64.urlsafe_b64encode(sha256_hash).decode("ascii")
+        thumbprint = self._base64url_nopad_encode_bytes(sha256_hash)
 
         return thumbprint
 
